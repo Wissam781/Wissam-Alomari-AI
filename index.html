@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<title>WISSAM AL-OMARI AI</title>
+<style>
+:root {
+  --gold:#d6ad58;
+  --gold2:#f3d58d;
+  --bg:#090909;
+  --panel:#121212;
+  --border:#29251d;
+  --muted:#999;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;background:var(--bg);color:#fff;
+ font-family:Arial,Tahoma,sans-serif;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+.layout{display:flex;min-height:100vh}
+.sidebar{
+ width:250px;background:#0e0e0e;
+ border-left:1px solid var(--border);
+ padding:22px 15px;flex-shrink:0;
+}
+.brand{text-align:center;padding:12px 0 28px}
+.falcon{font-size:43px;color:var(--gold)}
+.brand h2{font-size:19px;color:var(--gold2);margin:8px 0}
+.brand small{color:var(--muted);letter-spacing:2px}
+.nav-title{font-size:11px;color:#777;margin:18px 10px 8px}
+.nav button{
+ display:flex;width:100%;align-items:center;gap:12px;
+ padding:12px;border:0;border-radius:9px;
+ background:transparent;color:#bbb;text-align:right;
+ margin-bottom:5px;font-size:13px;
+}
+.nav button:hover,.nav button.active{
+ background:#211b10;color:var(--gold2);
+}
+.main{flex:1;min-width:0}
+.topbar{
+ height:68px;border-bottom:1px solid var(--border);
+ display:flex;align-items:center;justify-content:space-between;
+ padding:0 25px;background:#0d0d0d;
+}
+.topbar button{
+ background:transparent;border:1px solid var(--border);
+ color:#ddd;border-radius:8px;padding:9px 12px;
+}
+.top-actions{display:flex;gap:9px}
+.content{max-width:1250px;margin:auto;padding:28px}
+.welcome{
+ border:1px solid #40331b;border-radius:17px;
+ padding:35px 25px;text-align:center;
+ background:radial-gradient(ellipse at top,#302310 0%,#17130d 35%,#101010 75%);
+}
+.welcome .falcon{font-size:55px}
+.welcome h1{font-size:clamp(23px,4vw,38px);color:var(--gold2);margin:12px 0}
+.welcome p{color:#aaa;font-size:14px;line-height:1.9}
+.search{
+ max-width:550px;margin:23px auto 0;
+ display:flex;gap:8px;
+}
+.search input{
+ flex:1;min-width:0;background:#090909;
+ border:1px solid #514126;border-radius:9px;
+ padding:13px;color:white;outline:none;
+}
+.gold-btn{
+ background:linear-gradient(110deg,#a77a2e,#f0d38c);
+ border:0;color:#17110a;padding:12px 18px;
+ border-radius:9px;font-weight:bold;
+}
+.section-head{
+ display:flex;justify-content:space-between;
+ align-items:center;margin:30px 0 15px;
+}
+.section-head h2{font-size:18px;color:var(--gold2)}
+.section-head span{font-size:12px;color:#888}
+.grid{
+ display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:13px;
+}
+.card{
+ background:var(--panel);border:1px solid var(--border);
+ border-radius:12px;padding:18px;
+ transition:.2s;cursor:pointer;
+}
+.card:hover{border-color:var(--gold);transform:translateY(-3px)}
+.card .symbol{font-size:27px;color:var(--gold)}
+.card h3{font-size:14px;margin:13px 0 7px}
+.card p{font-size:12px;color:#999;line-height:1.7;margin:0}
+.tools .card{min-height:130px}
+.status{
+ margin-top:30px;padding:16px;
+ background:#101010;border:1px solid var(--border);
+ border-radius:12px;display:flex;justify-content:space-around;
+ flex-wrap:wrap;gap:15px;
+}
+.status div{text-align:center}
+.status strong{display:block;color:var(--gold2);font-size:18px}
+.status small{color:#888}
+.footer{
+ text-align:center;color:#777;font-size:11px;
+ padding:30px 10px;line-height:2;
+}
+.mobile-menu{display:none}
+@media(max-width:900px){
+ .sidebar{width:210px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:650px){
+ .layout{display:block}
+ .sidebar{
+  display:none;position:fixed;z-index:10;
+  top:0;bottom:0;right:0;width:260px;
+ }
+ .sidebar.open{display:block}
+ .mobile-menu{display:inline-block}
+ .topbar{padding:0 12px}
+ .content{padding:17px 13px}
+ .welcome{padding:27px 13px}
+ .grid{gap:9px}
+ .card{padding:13px}
+ .card h3{font-size:12px}
+ .card p{font-size:11px}
+ .top-actions button{padding:8px}
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<aside class="sidebar" id="sidebar">
+ <div class="brand">
+  <div class="falcon">♛</div>
+  <h2>WISSAM AL-OMARI</h2>
+  <small>ARTIFICIAL INTELLIGENCE</small>
+ </div>
+ <div class="nav">
+  <div class="nav-title">القائمة الرئيسية</div>
+  <button class="active" onclick="showSection('الرئيسية')">⌂ الرئيسية</button>
+  <button onclick="showSection('المحادثة الذكية')">✧ المحادثة الذكية</button>
+  <button onclick="showSection('المساعدون')">◈ المساعدون</button>
+  <button onclick="showSection('WISSAM AI COMMANDER')">♜ AI COMMANDER</button>
+  <div class="nav-title">المنصة</div>
+  <button onclick="showSection('WISSAM HACKING LAB')">⌘ الأمن السيبراني</button>
+  <button onclick="showSection('WISSAM SOCIAL')">◎ المجتمع</button>
+  <button onclick="showSection('WISSAM CHAMPIONS')">♛ الأبطال والإنجازات</button>
+  <button onclick="showSection('المشاريع')">▣ مشاريعي</button>
+  <button onclick="showSection('التعليم')">◇ التعليم والأكاديمية</button>
+  <button onclick="showSection('الإبداع')">✦ الإبداع والتصميم</button>
+  <div class="nav-title">حسابي</div>
+  <button onclick="showSection('الملف الشخصي')">◉ الملف الشخصي</button>
+  <button onclick="showSection('الإعدادات')">⚙ الإعدادات</button>
+ </div>
+</aside>
+
+<main class="main">
+ <header class="topbar">
+  <div>
+   <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+   <span style="color:var(--gold2);font-size:13px">WISSAM AI</span>
+  </div>
+  <div class="top-actions">
+   <button onclick="showSection('الإشعارات')">♢</button>
+   <button onclick="showSection('الملف الشخصي')">حسابي ◉</button>
+  </div>
+ </header>
+
+ <div class="content">
+  <section class="welcome">
+   <div class="falcon">♛</div>
+   <h1>مرحباً بك في WISSAM AI</h1>
+   <p>
+    عالمك المتكامل للذكاء الاصطناعي والأمن السيبراني والإبداع.
+    <br>كل أدواتك الذكية في مكان واحد.
+   </p>
+   <div class="search">
+    <input id="searchInput" placeholder="ماذا تريد أن تنجز اليوم؟">
+    <button class="gold-btn" onclick="searchAI()">ابدأ</button>
+   </div>
+  </section>
+
+  <div class="section-head">
+   <h2>مساعدوك الذكيون</h2>
+   <span>YOUR AI TEAM</span>
+  </div>
+  <section class="grid">
+   <div class="card" onclick="showSection('Wissam Cyber')">
+    <div class="symbol">⌘</div><h3>Wissam Cyber</h3>
+    <p>الأمن السيبراني والحماية الرقمية.</p>
+   </div>
+   <div class="card" onclick="showSection('Wissam Coder')">
+    <div class="symbol">⌨</div><h3>Wissam Coder</h3>
+    <p>البرمجة وصناعة التطبيقات.</p>
+   </div>
+   <div class="card" onclick="showSection('Wissam Creator')">
+    <div class="symbol">✎</div><h3>Wissam Creator</h3>
+    <p>الكتابة وصناعة المحتوى.</p>
+   </div>
+   <div class="card" onclick="showSection('Wissam Designer')">
+    <div class="symbol">✧</div><h3>Wissam Designer</h3>
+    <p>التصميم والأفكار البصرية.</p>
+   </div>
+   <div class="card" onclick="showSection('Wissam Teacher')">
+    <div class="symbol">◇</div><h3>Wissam Teacher</h3>
+    <p>التعليم والتدريب والتطوير.</p>
+   </div>
+   <div class="card" onclick="showSection('Wissam Researcher')">
+    <div class="symbol">⌕</div><h3>Wissam Researcher</h3>
+    <p>البحث والتحليل والمعلومات.</p>
+   </div>
+   <div class="card" onclick="showSection('Wissam Business')">
+    <div class="symbol">♜</div><h3>Wissam Business</h3>
+    <p>الأعمال والتخطيط والإدارة.</p>
+   </div>
+   <div class="card" onclick="showSection('WISSAM AI COMMANDER')">
+    <div class="symbol">♛</div><h3>AI Commander</h3>
+    <p>القائد الذكي لإدارة المهام.</p>
+   </div>
+  </section>
+
+  <div class="section-head">
+   <h2>عوالم WISSAM AI</h2>
+   <span>EXPLORE SERVICES</span>
+  </div>
+  <section class="grid tools">
+   <div class="card" onclick="showSection('WISSAM HACKING LAB')">
+    <div class="symbol">⌘</div><h3>WISSAM HACKING LAB</h3>
+    <p>مختبر الأمن السيبراني والتدريب الأخلاقي.</p>
+   </div>
+   <div class="card" onclick="showSection('WISSAM SOCIAL')">
+    <div class="symbol">◎</div><h3>WISSAM SOCIAL</h3>
+    <p>مجتمعك الرقمي وغرف التواصل.</p>
+   </div>
+   <div class="card" onclick="showSection('WISSAM CHAMPIONS')">
+    <div class="symbol">♛</div><h3>WISSAM CHAMPIONS</h3>
+    <p>البطولات والتصنيفات والجوائز.</p>
+   </div>
+   <div class="card" onclick="showSection('WISSAM AUTOPILOT AI')">
+    <div class="symbol">◈</div><h3>WISSAM AUTOPILOT</h3>
+    <p>المساعد التلقائي الذكي.</p>
+   </div>
+   <div class="card" onclick="showSection('مصنع التطبيقات')">
+    <div class="symbol">▣</div><h3>APP FACTORY</h3>
+    <p>إنشاء التطبيقات والبرامج.</p>
+   </div>
+   <div class="card" onclick="showSection('IMAGE LAB')">
+    <div class="symbol">▧</div><h3>IMAGE LAB</h3>
+    <p>إنشاء الصور والتصميمات.</p>
+   </div>
+   <div class="card" onclick="showSection('VIDEO PRO')">
+    <div class="symbol">▷</div><h3>VIDEO PRO</h3>
+    <p>إنتاج وتحرير الفيديو.</p>
+   </div>
+   <div class="card" onclick="showSection('WISSAM CLOUD')">
+    <div class="symbol">☁</div><h3>WISSAM CLOUD</h3>
+    <p>الملفات والمشاريع والتخزين.</p>
+   </div>
+  </section>
+
+  <div class="status">
+   <div><strong>7</strong><small>مساعدون متخصصون</small></div>
+   <div><strong>∞</strong><small>إمكانيات التطوير</small></div>
+   <div><strong>GLOBAL</strong><small>منصة عالمية</small></div>
+  </div>
+
+  <footer class="footer">
+   © 2026 WISSAM AL-OMARI AI — جميع الحقوق محفوظة.
+   <br>تأسيس وملكية: وسام العمري
+   <br><span style="color:#b18a45">نسخة الواجهة الأولية — قيد التطوير</span>
+  </footer>
+ </div>
+</main>
+</div>
+
+<script>
+function toggleMenu(){
+ document.getElementById('sidebar').classList.toggle('open');
+}
+function showSection(name){
+ alert('قسم '+name+' قيد التطوير. سيتم ربطه في المراحل القادمة.');
+}
+function searchAI(){
+ const value=document.getElementById('searchInput').value.trim();
+ if(!value){
+  alert('اكتب ما تريد إنجازه أولاً.');
+  return;
+ }
+ alert('تم استلام طلبك: '+value+
+ '\nالمحادثة الذكية سيتم ربطها بالذكاء الاصطناعي في المرحلة القادمة.');
+}
+</script>
+</body>
+</html>
