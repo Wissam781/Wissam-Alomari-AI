@@ -298,5 +298,93 @@ function searchAI(){
  '\nالمحادثة الذكية سيتم ربطها بالذكاء الاصطناعي في المرحلة القادمة.');
 }
 </script>
+
+<style>
+#languageBox {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 9999;
+}
+#languageBox select {
+  background: #111;
+  color: #d6b35b;
+  border: 1px solid #d6b35b;
+  border-radius: 8px;
+  padding: 9px;
+  font-size: 14px;
+}
+</style>
+
+<div id="languageBox">
+  <select id="languageSelect" aria-label="Choose language">
+    <option value="ar">العربية</option>
+    <option value="en">English</option>
+    <option value="fr">Français</option>
+  </select>
+</div>
+
+<script>
+const translations = {
+  ar: {
+    welcome: "مرحباً بك في وسام العمري AI",
+    search: "ابحث أو اكتب ما تريد...",
+    home: "الرئيسية",
+    chat: "المحادثة الذكية",
+    assistants: "المساعدون",
+    projects: "المشاريع",
+    settings: "الإعدادات"
+  },
+  en: {
+    welcome: "Welcome to WISSAM AL-OMARI AI",
+    search: "Search or type what you need...",
+    home: "Home",
+    chat: "AI Chat",
+    assistants: "Assistants",
+    projects: "Projects",
+    settings: "Settings"
+  },
+  fr: {
+    welcome: "Bienvenue sur WISSAM AL-OMARI AI",
+    search: "Recherchez ou écrivez votre demande...",
+    home: "Accueil",
+    chat: "Discussion IA",
+    assistants: "Assistants",
+    projects: "Projets",
+    settings: "Paramètres"
+  }
+};
+
+const languageSelect = document.getElementById("languageSelect");
+
+function changeLanguage(lang) {
+  const dict = translations[lang];
+  if (!dict) return;
+
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+  document.querySelectorAll("[data-translate]").forEach(element => {
+    const key = element.getAttribute("data-translate");
+    if (dict[key]) element.textContent = dict[key];
+  });
+
+  document.querySelectorAll("[data-translate-placeholder]").forEach(element => {
+    const key = element.getAttribute("data-translate-placeholder");
+    if (dict[key]) element.placeholder = dict[key];
+  });
+
+  localStorage.setItem("wissam-language", lang);
+}
+
+languageSelect.addEventListener("change", event => {
+  changeLanguage(event.target.value);
+});
+
+const savedLanguage = localStorage.getItem("wissam-language") || "ar";
+languageSelect.value = savedLanguage;
+changeLanguage(savedLanguage);
+</script>
+
 </body>
 </html>
